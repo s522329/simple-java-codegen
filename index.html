@@ -1,0 +1,89 @@
+<!DOCtype html>
+<html>
+  <head>
+    <meta http-equiv="content-type" content="text/html; charset=UTF-8" />
+    <title>Java Code-Gen</title>
+    <link rel="stylesheet" type="text/css" href="style.css" />
+    <!--link rel="icon" href="favicon.ico" /-->
+    <script type="text/javascript" src="template.js"></script>
+    <script type="text/javascript" src="itemarray.js"></script>
+    <script type="text/javascript" src="textinput.js"></script>
+    <script type="text/javascript" src="textinputs.js"></script>
+    <script type="text/javascript" src="inputselector.js"></script>
+    
+    <script type="text/javascript" src="classname.js"></script>
+    <script type="text/javascript" src="classfields.js"></script>
+    <script type="text/javascript" src="classconstants.js"></script>
+    <script type="text/javascript" src="classconstructors.js"></script>
+    <script type="text/javascript" src="classmethods.js"></script>
+    <script type="text/javascript" src="classlambdas.js"></script>
+    <script type="text/javascript" src="classmisc.js"></script>
+    <script type="text/javascript" src="jclass.js"></script>
+  </head>
+  <body>
+    <center>
+      <h1 id="title">Simple Java Code Creator</h1>
+      <hr style="width: 50%;" /><br />
+      <div id="wrapper">
+        <div id="box">
+        <table>
+          <tr>
+            <td style="width: 40%;">
+              <h3>Class Name</h3>
+              <input id="name" type="text" />
+              <h3>Constants</h3>
+              <div id="consts"></div>
+              <h3>Fields</h3>
+              <div id="fields"></div>
+              <h3>Constructors</h3>
+              <div id="cons"></div>
+              <h3>Setters</h3>
+              <label>
+                <input type="checkbox" id="setter" />
+                Enable method chaining ("<code>return this</code>")
+              </label>
+              <h3>Lambdas</h3>
+              <div id="lambdas"></div>
+              <h3>Methods</h3>
+              <div id="methods"></div>
+            </td>
+            <td style="width: 60%;" class="leftline">
+              <center>
+                <h2>Result</h2>
+                <pre>
+                  <textarea readonly id="output"></textarea>
+                </pre>
+              </center>
+            </td>
+          </tr>
+        </div>
+      </div>
+      <script>
+        const dom = new Proxy({}, {
+          'get': (obj, name) => obj[name] = document.querySelector('#' + name),
+          'set': (obj, name, val) => obj[name] = val
+        });
+        const name = new ClassName(dom.name);
+        const fields = new ClassFields(dom.fields);
+        const constants = new ClassConstants(dom.consts);
+        const constructors = new ClassConstructors(dom.cons, name, fields.items);
+        const setters = new ClassSetters(dom.setter, name, fields.items);
+        const getters = new ClassGetters(fields.items);
+        const lambdas = new ClassLambdas(dom.lambdas);
+        const methods = new ClassMethods(dom.methods);
+        const tostring = new ClassToString(fields.items);
+        const jclass = new JClass(template, dom.output, {
+          'NAME': name,
+          'FIELDS': fields,
+          'CONSTANTS': constants,
+          'CONSTRUCTORS': constructors,
+          'SETTERS': setters,
+          'GETTERS': getters,
+          'LAMBDAS': lambdas,
+          'METHODS': methods,
+          'TOSTRING': tostring
+        });
+      </script>
+    </center>
+  </body>
+</head>
