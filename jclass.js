@@ -13,5 +13,8 @@ JClass.prototype.update = function() {
 			indent = indent || '';
 			return indent + this.map[i].toString().replace(/\n/g, `${indent}`)
 		});
-	this.output.value = res.replace(/\{(\n\t*)+$/mg, '{').replace(/(\n\t*)\1+$/mg, '$1');
+	this.output.value = res.trim()
+		.replace(/\{(\n\t*)+$/mg, '{')
+		.replace(/^(\t*\n)+\}/mg, '}')
+		.replace(/(\n\t*)\1+$/mg, '$1');
 }

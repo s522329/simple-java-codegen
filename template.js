@@ -1,6 +1,8 @@
 const titleCase = str => str[0].toUpperCase() + str.substr(1);
 
 const template = `\
+$IMPORTS
+
 public class $NAME {
 	$CONSTANTS
 	$FIELDS
