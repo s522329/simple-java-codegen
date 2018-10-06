@@ -42,7 +42,7 @@ ClassGetters.prototype.toString = function() {
 		return `\
 public ${f[0]} get${titleCase(f[1])}() {
 	return ${f[1]};
-}`;
+}\n`;
 	}).join('');
 }
 
