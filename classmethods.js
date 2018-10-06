@@ -12,7 +12,7 @@ ClassMethods.prototype.validators = [
 	i => true
 ];
 ClassMethods.prototype.labels = ['r-type', 'name', 'block'];
-ClassMethods.prototype.sizes = ['4em', '6em', '60%'];
+ClassMethods.prototype.sizes = ['4em', '8em', '60%'];
 
 ClassMethods.prototype.toString = function() {
 	const inputs = this.items.get();

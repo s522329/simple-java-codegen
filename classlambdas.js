@@ -12,7 +12,7 @@ ClassLambdas.prototype.validators = [
 	i => i
 ];
 ClassLambdas.prototype.labels = ['r-type', 'name', 'r-value'];
-ClassLambdas.prototype.sizes = ['4em', '6em', '10em'];
+ClassLambdas.prototype.sizes = ['4em', '8em', '14em'];
 
 ClassLambdas.prototype.toString = function() {
 	const inputs = this.items.get();

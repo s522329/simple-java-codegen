@@ -15,7 +15,7 @@ ClassFields.prototype.validators = [
 	() => true
 ];
 ClassFields.prototype.labels = ['type', 'name', 'initializer'];
-ClassFields.prototype.sizes = ['4em', '6em', '8em'];
+ClassFields.prototype.sizes = ['4em', '8em', '12em'];
 
 ClassFields.prototype.toString = function() {
 	const inputs = this.items.get();
