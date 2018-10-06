@@ -16,5 +16,6 @@ JClass.prototype.update = function() {
 	this.output.value = res.trim()
 		.replace(/\{(\n\t*)+$/mg, '{')
 		.replace(/^(\t*\n)+\}/mg, '}')
+		.replace(/\{\s+\}/g, '{}')
 		.replace(/(\n\t*)\1+$/mg, '$1');
 }

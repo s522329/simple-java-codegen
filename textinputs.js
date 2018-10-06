@@ -7,7 +7,9 @@ function TextInputs(container, template, validators, flavors, sizes, lastisbig) 
 	for(let i=1; i<strings.length; i++) {
 		const input = document.createElement(i == strings.length - 1 && lastisbig
 			? 'textarea' : 'input');
-		if(i == strings.length - 1 && lastisbig)
+		if(i == strings.length - 1 && lastisbig) {
+			input.title = 'Press Ctrl-I to input TAB';
+			input.style.marginLeft = '4em';
 			input.addEventListener('keydown', ev => {
 				if(ev.code === 'KeyI' && ev.ctrlKey
 						&& !ev.altKey && !ev.shiftKey && !ev.metaKey) {
@@ -17,6 +19,7 @@ function TextInputs(container, template, validators, flavors, sizes, lastisbig) 
 					ev.preventDefault();
 				}
 			});
+		}
 		input.placeholder = (flavors && flavors[i - 1]) || '';
 		input.style.width = (sizes && sizes[i - 1]) || '10em';
 		this.container.appendChild(input);
