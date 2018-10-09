@@ -6,5 +6,5 @@ ClassName.prototype = Object.create(TextInput.prototype);
 ClassName.prototype.constructor = ClassName;
 
 ClassName.prototype.toString = function() {
-	return this.get() || 'null';
+	return this.get() || null;
 };

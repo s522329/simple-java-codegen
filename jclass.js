@@ -7,12 +7,19 @@ function JClass(template, output, map) {
 }
 
 JClass.prototype.update = function() {
-	let res = this.template;
-	for(let i in this.map)
+	let res = this.template, okay = true;
+	for(let i in this.map) {
 		res = res.replace(new RegExp(`(\\n[ \t]*)?\\$${i}`, 'm'), (match, indent) => {
+			let value = this.map[i].toString();
+			if(value === null) {
+				okay = false;
+				return;
+			}
 			indent = indent || '';
 			return indent + this.map[i].toString().replace(/\n/g, `${indent}`)
 		});
+		if(!okay) return;
+	}
 	this.output.value = res.trim()
 		.replace(/\{(\n\t*)+$/mg, '{')
 		.replace(/^(\t*\n)+\}/mg, '}')
