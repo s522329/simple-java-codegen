@@ -49,17 +49,24 @@ public ${f[0]} get${titleCase(f[1])}() {
 function ClassToString(fields) {
 	TemplateItem.call(this);
 	this.fields = fields;
+	this.hasarray = false;
 	fields.registerCb(this.propagate.bind(this));
 }
 ClassToString.prototype = Object.create(TemplateItem.prototype);
 ClassToString.prototype.constructor = ClassToString;
 
 ClassToString.prototype.toString = function() {
+	this.hasarray = false;
 	const items = this.fields.get();
 	const contents = items.map(item => {
 		const f = item.get();
 		if(!f) return '';
-		return `\n\t\t+ ", ${f[1]} = " + ${f[1]}`;
+		let value = f[1];
+		if(f[0].includes('[]') || f[1].includes('[]')) {
+			this.hasarray = true;
+			value = `Arrays.toString(${value})`;
+		}
+		return `\n\t\t+ ", ${f[1]} = " + ${value}`;
 	}).join('');
 	return `public String toString() {
 	return this.getClass().getName()${contents};

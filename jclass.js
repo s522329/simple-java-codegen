@@ -15,8 +15,7 @@ JClass.prototype.update = function() {
 				okay = false;
 				return;
 			}
-			indent = indent || '';
-			return indent + this.map[i].toString().replace(/\n/g, `${indent}`)
+			return (indent || '') + this.map[i].toString().replace(/\n/g, `${indent || '\n'}`)
 		});
 		if(!okay) return;
 	}
