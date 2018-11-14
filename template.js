@@ -31,7 +31,7 @@ TemplateItem.prototype.get = function() {
 TemplateItem.prototype.registerCb = function(cb) {
 	if(cb instanceof Function)
 		this.callbacks.push(cb);
-	else throw 'Error: cb is not a function!';
+	else throw new Error('cb is not a function!');
 };
 
 TemplateItem.prototype.propagate = function() {
